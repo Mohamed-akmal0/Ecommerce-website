@@ -1,0 +1,61 @@
+<%-include('header')-%>
+<%-include('adminNav')-%>
+<div class="container-fluid admin">
+  <div class="navbar">
+      <div class="logo">
+          <img src="/frontend-images/logo.png" alt="" width="125px">
+      </div>
+      <nav>
+          <ul>
+              <li><a href="">Dashboard</a></li>
+              <li><a href="/admin/admin_product">Products</a></li>
+              <li><a href="">Categories</a></li>
+              <li><a href="/admin/admin_page">Customers</a></li>
+              <li><a href="/admin/view-orders">Ordes</a></li>
+              <li><a href="/admin/logout">Logout</a></li>
+
+          </ul>
+      </nav>
+  </div>
+</div>
+<div class="text-center center-div" id="login">
+  <div class="container w-25 border py-5">
+      <div class="title pb-5">
+          <h2 class="font-weight-bold"> Category </h2>
+          <span>Edit Category</span>
+      </div>
+      <form action="" method="" id="editCatagory">
+        <input type="text" value="<%=category._id%>" hidden id="catid"> 
+          <div class="form-group">
+            <label for="">Category</label>
+              <input type="text" class="form-control"  name="catogory" required value="<%=category.catogory%>" id="catDetails">
+          </div><br>
+          <div class="form-group">
+            <label for="">Offer</label>
+            <input type="number" class="form-control" name="Offer" value="<%=category.Offer%>" id="catOffer">
+          </div>
+          <button type="submit" class="btn btn-success rounded-pill">Edit Category</button>
+      </form>
+
+      <script>
+        $("#editCatagory").submit((e) => {
+            e.preventDefault()
+            let id = document.getElementById("catid").value
+            let catdetails = document.getElementById("catDetails").value
+            let catOffer = document.getElementById("catOffer").value
+            $.ajax({
+                url:'/admin/edit-category',
+                method:'patch',
+                data:{
+                    catId:id,
+                    category : catdetails,
+                    offer:catOffer
+                },
+                success : (response) => {
+                    console.log(response)
+                    location.href = '/admin/categories'
+                }
+            })
+        })
+      </script>
+<%-include('footer')-%>

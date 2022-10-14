@@ -1,0 +1,126 @@
+<%-include('header')-%>
+<%-include('userNAVBar')-%> 
+    <!-- <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <img src="frontend-images/logo.png" alt="" width="125px">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="">Home</a></li>
+                    <li><a href="">Products</a></li>
+                    <li><a href="">About</a></li>
+                    <li><a href="">Contact</a></li>
+                    <li><a href="">Account</a></li>
+    
+                </ul>
+            </nav>
+            <img src="frontend-images/shopping-cart.png" alt="" width="30px" height="30px">
+        </div>
+    </div> -->
+    
+    <div class="account-page">
+    <div class="container">
+    <div class="row">
+    <div class="col-2">
+      <div class="form-container">
+        <div class="form-btn">
+          <span>Signup</span>
+          <br>
+      </div>
+     
+     <% if(typeof alert != 'undefined') { %>
+      <%alert.forEach(function(error){%>
+        
+          <p style="color: red; font-size: 14px;" ><%=error.msg%></p>
+        
+      <%})%>
+    <%}%>
+    <form action="/signup" method="post">
+      <div class="form-group">
+        <input type="text" id="user" class="form-control" placeholder="Username" name="user" >
+        
+    </div><br>
+    <div class="form-group">
+        <input type="email" id="email" class="form-control" placeholder="email" name="email" >  
+    </div><br>
+
+    <div class="form-group">
+        <input type="password" id="password" class="form-control" placeholder="password" name="password" >
+    </div><br>
+    <button type="submit" class="btn ">Signup</button>
+  </form>
+    
+    </div>
+  </div>
+  </div>
+</div>
+</div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+    <!-- <script src="/validation.js"></script> -->
+    <!-- <script>
+        $(document).ready(function () {
+    console.log("started");
+    jQuery.validator.addMethod(
+      "testUsername",
+      function (value, element) {
+        return this.optional(element) || /^[a-zA-Z0-9_]+$/.test(value);
+      },
+      "Use only alphabets and undersore"
+    );
+    jQuery.validator.addMethod(
+      "testName",
+      function (value, element) {
+        return this.optional(element) || /^[a-zA-Z ]+$/.test(value);
+      },
+      "Use only alphabets"
+    );
+    
+    jQuery.validator.addMethod(
+      "minlength",
+      function (value, element, params) {
+        return this.optional(element) || value.trim().length >= params;
+      },
+      jQuery.validator.format("Please enter at least {0} characters.")
+    );
+    $("#signup").validate({
+      rules: {
+        user: {
+          required: true,
+          minlength: 4,
+          maxlength: 50,
+          testName : true,
+        },
+        email: {
+          required: true,
+          email: true,
+        },
+        password: {
+          required: true,
+          minlength: 5,
+        },
+      },
+      submitHandler: function (form) {
+        // form.preventDefault();
+        console.log("recieved");
+        $.ajax({
+          url: "/route/signup",
+          data: $("#signup").serialize(),
+          method: "POST",
+          success: function (response) {  
+            window.location.reload();
+          },
+          error: function (err) {
+            err = jQuery.parseJSON(err.responseText);
+            console.log(err.message);
+            $("#error").text(err.message);
+          },
+        });
+      },
+    });
+  });
+    </script> -->
+<%- include('footer') -%>

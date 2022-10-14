@@ -1,0 +1,110 @@
+<%-include('header')-%>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+  <script src=" https://code.jquery.com/jquery-3.5.1.js"> </script>
+  <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<%-include('userNAVBar')-%>
+
+<div class="small-container">
+    <!-- <div class="main-container"> -->
+             <table class="display" style="width: 100%;" id="userOrders">
+                <thead>
+                    <tr> 
+                        <th >Date</th> 
+                        <th >Address</th>
+                        <th >Mobile</th>
+                        <th >Amount</th>
+                        <th >payment Method</th>
+                        <th >status</th>
+                        <th >Cancel</th>
+                        <th >Return</th>
+                        <th >view</th>
+                       
+                     </tr>
+                </thead>
+                <tbody>
+                     <% orders.forEach((element) => { %>
+                    <tr>
+                        <td ><%=element.date%></td>  
+                        <td ><%=element.deliveryDetails.lastname%> <%=element.deliveryDetails.district%> <%=element.deliveryDetails.state%> <%=element.deliveryDetails.pincode%></td>
+                        <td ><%=element.deliveryDetails.phone%></td>
+                        <td ><%=element.totalAmount%></td>
+                        <td ><%=element.payment%></td>
+                        <td ><%=element.status%></td>
+                        <td><button class="btn" onclick="cancelOrder(`<%=element._id%>`)" id="cancel">Cancel</button></td> 
+                        <td><button class="btn" onclick="returnOrder(`<%=element._id%>`)" id="return">Return</button></td>
+                        <td ><a href="/view-product/<%=element._id%>">View product</a></td> 
+                    </tr>
+                    <%})%>
+                </tbody>
+            </table>   
+         </div>        
+       <!-- <%orders.forEach((element) => { %> -->
+        <!-- <div class="d-flex"> -->
+
+        
+          <!-- <div class="small-right-div  ">
+          <div class="Small-right-Div ">
+             <div class="small-rectangle ">
+               <div class="container d-flex justify">
+                 <h4>ORDER PLACED : </h4>
+                 <p>TOTAL PRICE : </p>
+                 <p>SHIP TO : </p>
+                </div>
+              </div>
+              <div class="small-Rectangle">
+                <div class="container d-flex justify">
+                  <p class="color"><%=element.date%></p>
+                  <p class="color">Rs:<%=element.totalAmount%></p>
+                  <p class="color"><%=element.deliveryDetails.address%></p>
+                </div>
+              </div>
+              <h5>Order status: <%=element.status%></h5>
+              <div class="small-square">
+                <img src="" alt=""style="width: 80px; height=80px">
+              </div>  -->
+               <!-- <a href="/edit-orders/<%=element._id%>" class="btn" >Cancel</a> -->
+               <!-- <button class="btn" onclick="cancelOrder(`<%=element._id%>`)" id="cancel">Cancel</button> 
+             </div>
+          </div> -->
+        <!-- </div> -->
+      <!-- <% }) %>  -->
+    <!-- </div>
+</div> -->
+<script>
+  function cancelOrder(id) {
+    console.log(id)
+    $.ajax({
+      url:`/edit-orders/${id}`,
+      method:"patch",
+     success : (response) => {
+      // location.href = '/orders'
+      window.location.reload()
+     }
+    })
+  }
+</script>
+<script>
+   function returnOrder(id){
+    console.log(id)
+    $.ajax({
+      url:`/return-orders/${id}`,
+      method:"patch",
+      success: (response) => {
+        console.log(response)
+        // location.href = '/orders'
+        window.location.reload()
+      }
+    })
+  }
+</script>
+<script>
+  $(document).ready(function () {
+    $('#userOrders').DataTable({
+      dom:'Bfrtip',
+      "paging" : false,
+      // "ordering" : false,
+      "info" : false
+    });
+  });
+</script>
+<%-include('footer')-%>

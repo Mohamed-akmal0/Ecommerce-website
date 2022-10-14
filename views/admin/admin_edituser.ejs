@@ -1,0 +1,39 @@
+<%-include('header')-%>
+<div class="text-center center-div mt-5 "id="login" >
+    <div class="container w-25 border py-5">
+        <div class="title pb-5">
+            <h2 class="font-weight-bold">Block</h2>
+            <span>Block  user</span>
+        </div>
+        <form action="" method="" class="pt-3" id="adminEditUser">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="stauts" name="blocked" value="<%=user.blocked%>">
+            </div><br>
+            <input type="text"  value="<%=user._id%>" hidden id="userid"> 
+            <button type="submit" class="btn btn-success rounded-pill">Block</button>
+        </form>
+    </div>
+
+</div>
+<script>
+    $("#adminEditUser").submit((e) => {
+        console.log('edit user ajax function')
+        e.preventDefault();
+        let id= document.getElementById("userid").value
+        console.log(id)
+        $.ajax({
+            url:`/edit-user/${id}`,
+            method:"put",
+            data:$("adminEditUser").serialize(),
+            success:(response) => {
+                console.log(reponse)
+                if(response){
+                    location.href('/admin/product')
+                }else{
+                    alert('There is an error occured while you edit you product')
+                }
+            }
+        })
+    })
+</script>
+<%- include('footer') -%>

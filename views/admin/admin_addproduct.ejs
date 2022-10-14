@@ -1,0 +1,75 @@
+<%-include('header')-%>
+
+ <!-- cropper js cdn -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.css" integrity="sha512-+VDbDxc9zesADd49pfvz7CgsOl2xREI/7gnzcdyA9XjuTxLXrdpuz21VVIqc5HPfZji2CypSbxx1lgD7BgBK5g==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+
+
+<div class="text-center center-div" id="login">
+    <div class="container w-25 border py-5">
+        <div class="title pb-5">
+            <h2 class="font-weight-bold"> Product</h2>
+            <span>Add a Product</span>
+        </div>
+        <form action="/admin/add_product" enctype="multipart/form-data" method="post" >
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Product Name" name="name" required>
+            </div><br>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Description" name="description" required>  
+            </div><br>
+            <div class="form-group">
+                <input type="number" class="form-control" placeholder="Stock" name="stock" required>  
+            </div><br>
+            <div class="form-group">
+                <input type="number" class="form-control" placeholder="Price" name="price" required>  
+            </div><br>
+            <div class="form-group">
+                
+            <!-- <input type="text" class="form-control" placeholder="Catogory" name="catogory" required>   -->
+                <select name="catogory" id="">
+                    <%getcategory.forEach((element) => {%>
+                    <option value="<%=element._id%>"><%=element.catogory%></option>
+                    <%})%>
+                </select>
+            </div><br>
+            <div class="form-group">
+                <input type="file" class="form-control" placeholder="Upload Image" name="image" id="id_image1">
+            </div>
+            <div class="form-group">
+                <input type="file" class="form-control" placeholder="Upload Image" name="image1">
+            </div>
+            <div class="form-group">
+                <input type="file" class="form-control" placeholder="Upload Image" name="image2">
+            </div>
+            <div class="form-group">
+                <input type="file" class="form-control" placeholder="Upload Image" name="image3">
+            </div>
+
+
+            <!-- {{!-- ///////////crop/////////////// --}} -->
+            <div id="crop">
+                        <div class="vald-info" id="info"></div>
+                        <h5 class="error_form text-danger" id="image1_error_message"></h5>
+                           <div style="display: flex">
+                           <div id="image-box1" class="image-container clr" style="height: 300px; width: 20%"></div>
+                              <button type="button"  class="btn btneds bg-success"  id="crop-btn1" style=" margin-top: 10px; display: none; width: 50%; margin: 20rem 0rem 0rem 0rem;" >crop</button>
+                           </div>
+            </div>
+            <div id="crop">
+                <div class="vald-info" id="info"></div>
+                <h5 class="error_form text-danger" id="image1_error_message"></h5>
+                   <div style="display: flex">
+                   <div id="image-box2" class="image-container clr" style="height: 300px; width: 20%"></div>
+                      <button type="button"  class="btn btneds bg-success"  id="crop-btn2" style=" margin-top: 10px; display: none; width: 50%; margin: 20rem 0rem 0rem 0rem;" >crop</button>
+                   </div>
+            </div>
+            <button type="submit" class="btn btn-success rounded-pill">Add Product</button>
+
+        </form>
+
+        <script src="/javascripts/crop.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.js" integrity="sha512-ZK6m9vADamSl5fxBPtXw6ho6A4TuX89HUbcfvxa2v2NYNT/7l8yFGJ3JlXyMN4hlNbz0il4k6DvqbIW5CCwqkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<%-include('footer')-%> 

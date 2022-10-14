@@ -1,0 +1,19 @@
+<%-include('header')-%>
+<%-include('adminNav')-%>
+
+<div class="text-center center-div" id="login">
+  <div class="container w-25 border py-5">
+      <div class="title pb-5">
+          <h2 class="font-weight-bold"> Category </h2>
+          <span>Add a Category</span>
+      </div>
+      <form action="/admin/add_categories" method="post" >
+          <div class="form-group">
+              <input type="text" class="form-control" placeholder="Categories" name="catogory" required>
+          </div><br>
+          <div class="form-group">
+            <input type="number" class="form-control" placeholder="Offers : 0" name="Offer" value="0" hidden>
+          </div>
+          <button type="submit" class="btn btn-success rounded-pill">Add Category</button>
+      </form>
+<%-include('footer')-%>

@@ -1,0 +1,71 @@
+<%-include('header')-%>
+<%-include('adminNav')-%>
+
+<div class="container-fluid admin">
+  <table id="orders" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>NO</th>
+            <th>Date</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Pincode</th>
+            <th>Amount</th>
+            <th>payment</th>
+            <th>Status</th>
+            <th>Status update</th>
+            <th>Save</th>
+        </tr>
+    </thead>
+    <tbody>
+      
+      <% userOrders.forEach((element,i) => {%>
+        <tr>
+          <th scope="row"><%=i+1%></th>
+          <td><%=element.date%></td>
+          <td><%=element.deliveryDetails.firstname%></td>
+          <td><%=element.deliveryDetails.emailaddress%></td>
+          <td><%=element.deliveryDetails.address%></td>
+          <td><%=element.deliveryDetails.phone%></td>
+          <td><%=element.deliveryDetails.pincode%></td>
+          <td><%=element.totalAmount%></td>
+          <td><%=element.payment%></td>
+          <td><%=element.status%></td>
+          <td><form action="/admin/edit-status/<%=element._id%>" method="post" id="editStatus">
+            <select name="status"  class="another-button" >
+              <option  value="placed"> placed</option>
+              <option  value="pending">pending</option>
+              <option  value="shipped">shipped</option>
+              <option  value="delivered">Delivered</option>
+            </select>
+            <td><button type="submit" class="btn">Save</button></td>
+          </form></td>
+        </tr>
+        <%})%>
+      </tbody>
+  </table>
+</div>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('#orders').DataTable({
+      dom:'Bfrtip',
+      buttons: [
+        'copy','csv','excel','pdf','print'
+      ],
+      "paging" : false,
+      "ordering" : false,
+      "info" : false
+    });
+  });
+</script>
+   
+<%-include('footer')-%>

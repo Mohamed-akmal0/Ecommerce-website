@@ -1,0 +1,73 @@
+<%-include('header')-%>
+   <%-include('userNav')-%>
+    <div class="small-container">
+        <div class="row row-2" >
+            <h2>All Products</h2>
+            <select>
+                <% category.forEach((element) => { %>
+                    <option><%=element.catogory%></option>
+                <% }) %>
+            </select>
+        </div>
+        <div class="row">
+            <% product.forEach((element,i)=>{ %>
+            <div class="col-4">
+                <img src="/images/<%=element._id%>.jpg">
+                <h2><%=element.name%></h2>
+                <p><%=element.description%></p><br>
+                <p><del style="color: red;">Rs <%=element.price%></del></p>
+                <p>Rs <%=element.discountedPrice%></p>
+                
+                <a href="/add-to-whishlist/<%=element._id%>"><img src="frontend-images/heart.png" alt="" style="width: 30px; height: 30px; margin: -2px;"></a>
+                <a href="/product_detail/<%=element._id%>" class="btn" >Quick view</a>
+            </div>
+            <% }) %>
+        </div>
+        <div class="page-btn">
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+            <span>&#8594;</span>
+        </div>
+    </div>
+    <!-- footer -->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col-1">
+                    <h3>
+                        Download our app
+                    </h3>
+                    <p>Download our app for android and ios mobile phone </p>
+                    <div class="app-logo">
+                        <img src="frontend-images/play-store.png" >
+                        <img src="frontend-images/app-store.png" >
+                    </div>
+                </div>
+                <div class="footer-col-2">
+                    <img src="frontend-images/logo-white.png" alt="">
+                    <p>Download our app for android and ios mobile phone </p>
+                </div>
+                <div class="footer-col-3">
+                    <h3>Usefull Links</h3>
+                    <ul>
+                        <li>Coupons</li>
+                        <li>Blog Post</li>
+                        <li>Return Policy</li>
+                        <li>Join Affiliate</li>
+                    </ul>
+                </div>
+                <div class="footer-col-4">
+                    <h3>Follow us</h3>
+                    <ul>
+                        <li>Facebook</li>
+                        <li>Instagram</li>
+                        <li>Youtube</li>
+                        <li>Twitter</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('footer') -%>

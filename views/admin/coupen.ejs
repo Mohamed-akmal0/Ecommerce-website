@@ -1,0 +1,65 @@
+<%-include('header')-%>
+<%-include('adminNav')-%>
+<br>
+<div class="container">
+  <div class="form-container">
+    <h4>Coupen</h4>
+    <form action="" method="post" id="coupenForm">
+      <input type="text" placeholder="Coupen name" name="cname">
+      <input type="number" placeholder="Offer" name="Offer">
+      <input type="date" placeholder="Expiry date" name="Date">
+      <button type="submit" class="btn">Save</button>
+    </form>
+  </div>
+</div>
+<br><br>
+<div class="container">
+  <table id="example1" class="display" style="width:100%">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Coupon Name</th>
+        <th>Offer</th>
+        <th>Expiry Date</th>
+        <!-- <th></th> -->
+        
+      </tr>
+    </thead>
+    <tbody>
+      <% coupon.forEach((element,i)=>{ %>
+  
+        <tr>
+          <th scope="row"><%=i+1%></th>
+          <td><%=element.couponName%></td>
+          <td><%=element.couponOffer%></td>
+          <td><%=element.ExpireDate%></td>
+          <!-- <td></td> -->
+          <td><button class="btn" onclick="deleteCoupon(`<%=element._id%>`)">Delete</button></td>         
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<script>
+function deleteCoupon(id){
+  console.log(id)
+  $.ajax({
+    url:`/admin/delete_coupon/${id}`,
+    method:'delete',
+    success : (response) => {
+      location.reload()
+    }
+  })
+}
+
+  $(document).ready(function () {
+    $('#example1').DataTable({
+      'searching':false,
+      'paging':false,
+      'ordering':false,
+      'info':false
+    });
+  });
+</script>
+<%-include('footer')-%>

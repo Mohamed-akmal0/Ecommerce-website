@@ -1,0 +1,146 @@
+<%-include('header')-%>
+<%-include('userNAVBar')-%>
+
+<% if(products) {%>
+    <div class="small-container cart-page">
+        <table class="table">
+            <tr>
+                <th class="th" >Product</th>
+                <th class="th">Quantity</th>
+                <th class="th">Delete</th>
+            </tr>
+            <%products.forEach((element)=>{%>
+                <tr>
+                    <td class="td">
+                        
+                        <div class="cart-info" > 
+                            <img src="/images/<%=element.product._id%>.jpg">
+                        </div>
+                        <div>`
+                            <p><%=element.product.name%></p>
+                            <small>Rs <%=element.product.price%></small><br>
+                        </div>
+                    </td>
+                    <td style="text-align: center; padding-left: 10px;">
+                        <button class="td---button" onclick="changeQuantity('<%=element._id%>','<%=element.product._id%>','<%=user._id%>',-1)"> -
+                        </button>
+                        <span id="<%=element.product._id%>" ><%=element.quantity%></span>
+                        <button class="td---button" onclick="changeQuantity('<%=element._id%>','<%=element.product._id%>','<%=user._id%>',1)" >+
+                        </button>
+                    </td>
+                    <td>
+                        <!-- <a href="/delete-cart/<%=element.product._id%>"><i class="material-icons">delete</i></a> -->
+                        <button onclick="return alert('Do you want ot delete'),deleteCart(`<%=element.product._id%> `)"><i class="material-icons" style="color: red;">delete</i></button>
+                        
+                    </td>
+                </tr>
+                <%})%>
+            </table>
+        </div>
+<% } else {%>
+    <div class="cartIsempty">
+        <h4>Your cart is empty</h4>
+        <img src="/frontend-images/3298067.jpg" width="460px" height="460px" >
+    </div>
+<% } %>
+ <!-- <% if(totalAmount == null) {%> -->
+    <!-- <p>There is no product</p> -->
+<!-- <% } else { %> -->
+    <div class="total">
+        <table>
+            <tr>
+                <td>Total</td>
+                <td>Rs <span id="total"><%=totalAmount%></span> </td>
+            </tr>
+            <tr>
+                
+            </tr> 
+            <tr>
+                <td></td>
+                <td><span><a href="/proceed-to-checkout" class="">checkout</a></span></td>
+                
+            </tr> 
+        </table>
+    </div>
+<!-- <% } %>  -->
+
+ <!-- footer -->
+ <div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="footer-col-1">
+                <h3>
+                    Download our app
+                </h3>
+                <p>Download our app for android and ios mobile phone </p>
+                <div class="app-logo">
+                    <img src="/frontend-images/play-store.png" >
+                    <img src="/frontend-images/app-store.png" >
+                </div>
+            </div>
+            <div class="footer-col-2">
+                <img src="/frontend-images/logo-white.png" alt="">
+                <p>Download our app for android and ios mobile phone </p>
+            </div>
+            <div class="footer-col-3">
+                <h3>Usefull Links</h3>
+                <ul>
+                    <li>Coupons</li>
+                    <li>Blog Post</li>
+                    <li>Return Policy</li>
+                    <li>Join Affiliate</li>
+                </ul>
+            </div>
+            <div class="footer-col-4">
+                <h3>Follow us</h3>
+                <ul>
+                    <li>Facebook</li>
+                    <li>Instagram</li>
+                    <li>Youtube</li>
+                    <li>Twitter</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function changeQuantity(cid,pid,uid,count) {
+        let quantity = parseInt(document.getElementById(pid).innerHTML)
+        count = parseInt(count)
+
+        $.ajax({
+            url:'/change-product-quantity',
+            data:{
+                user:uid,
+                cart:cid,
+                product:pid,
+                count:count,
+                quantity:quantity
+            },
+            method:'post',
+            success:(response)  => {
+                if(response.removeProduct){
+                    alert('Product Remove from the cart')
+                    location.reload()
+                }else{
+                    document.getElementById(pid).innerHTML = quantity+count
+                    document.getElementById('total').innerHTML = response.total
+                }
+            }
+        })
+    }
+</script>
+<script>
+    function deleteCart(pid){
+        console.log(pid)
+        $.ajax({
+            url:`/delete-cart/${pid}`,
+            method:'delete',
+            success:(response) => {
+                location.reload()
+            }
+        })
+
+    }
+</script>
+<%-include('footer')-%>

@@ -1,0 +1,59 @@
+<%-include('header')-%>
+<%-include('userNAVBar')-%>
+<!-- <div class="header">
+  <div class="container">
+      <div class="navbar">
+          <div class="logo">
+              <img src="frontend-images/logo.png" alt="" width="125px">
+          </div>
+          <nav>
+              <ul>
+                  <li><a href="">Home</a></li>
+                  <li><a href="">Products</a></li>
+                  <li><a href="/signup"><img src="frontend-images/user.png" class="account-image"></a></li>
+
+  
+              </ul>
+          </nav>
+          <img src="frontend-images/shopping-cart.png" alt="" width="30px" height="30px">
+      </div> -->
+      <div class="container">
+        <p class="your-address">EDIT ADDRESS</p>
+        <div class="Right-div">
+           
+            <br>
+            <div class="form-div">
+                <form action="" method="" id="editAddress">
+                    
+                    <input type="text" name="full_name"   placeholder="Full name" value="<%=edit.full_name%>">
+                    <input type="text" name="house"   placeholder="House" value="<%=edit.house%>">
+                    <input type="number" name="phone"    placeholder="Phone Number" value="<%=edit.phone%>">
+                    <input type="text" name="country"    placeholder="Country" value="<%=edit.country%>">
+                    <input type="text" name="state"    placeholder="State" value="<%=edit.state%>">
+                    <input type="text" name="district"   placeholder="District" value="<%=edit.district%>">
+                    <input type="number" name="pincode"   placeholder="Pincode" value="<%=edit.pincode%>">
+                    <input type="text" name="addressId" value="<%=edit._id%>"  id="addressId">
+                    <!-- <input type="text" name="userid" value="<%=user._id%>" hidden> -->
+                    <br>
+                    <input type="submit" value="submit" class="btn">
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        $("#editAddress").submit((e) => {
+            e.preventDefault();
+            let editId = document.getElementById("addressId").value
+            console.log(editId)
+            $.ajax({
+                url:`/edit-address/${editId}`,
+                method:"put",
+                data:$("#editAddress").serialize(),
+                success:(response) => {
+                    alert("Press ok to confirm")
+                    location.href=('/user-address')
+                }
+            })
+        })
+    </script>
+<%-include('footer')-%>

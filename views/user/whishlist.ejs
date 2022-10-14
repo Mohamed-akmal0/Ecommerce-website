@@ -1,0 +1,50 @@
+<%-include('header')-%>
+<%-include('userNAVBar')-%>
+<div class="container">
+  
+ 
+  <div class="container">
+    <div class="main-container">
+    <div class="RIGHT-DIV">
+      <% if(list == 0 ) { %>
+        <h4>Your whishllist is empty</h4>
+      <% } else {  %>
+        <%list.forEach((element) => { %>
+          <div class="card">
+            <div class="container container-details">
+              <div class="small-square">
+                <img src="/images/<%=element.product._id%>.jpg"" style="width: 130px; height:130px">
+                <br>
+                <p><%=element.product.name%></p>
+                <br>
+                <label for="">Description:<%=element.product.description%></label>
+                <!-- <a href="/delete-whishlist/<%=element._id%>"><i class="material-icons" style="color: red;">delete</i></a> -->
+                <button onclick="deleteWhishlist(`<%=element._id%>`,`<%=element.product._id%>`)"><i class="material-icons" style="color: red;">delete</i></button>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      <% } %>
+    </div>
+  </div>
+
+ 
+<script>
+  function deleteWhishlist(wid,pid){
+    console.log(wid)
+    console.log(pid)
+    $.ajax({
+      url:`/delete-whishlist`,
+      method:'patch',
+      data:{
+        wishid:wid,
+        productid:pid
+      },
+      success:(response) => {
+        console.log(response)
+        location.reload()
+      }
+    })
+  }
+</script>
+<%-include('footer')-%>

@@ -1,0 +1,41 @@
+<%-include('header')-%>
+
+<div class="text-center center-div mt-5 " id="login">
+    <div class="container w-25 border py-5">
+        <div class="title pb-5">
+            <h2 class="font-weight-bold"> Edit Product</h2>
+            <!-- <span>Edit Product</span> -->
+        </div>
+        <form action="/admin/edit-product/<%=product._id%>" enctype="multipart/form-data" method="post" >
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Product Name" name="name" required value="<%=product.name%>">
+            </div><br>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Description" name="description" required value="<%=product.description%>">  
+            </div><br>
+            <div class="form-group">
+                <input type="number" class="form-control" placeholder="Stock" name="stock" required value="<%=product.stock%>">  
+            </div><br>
+            <div class="form-group">
+                <input type="number" class="form-control" placeholder="Price" name="price" required value="<%=product.price%>">  
+            </div><br>
+            <!-- <div class="form-group">
+                <input type="text" class="form-control" placeholder="Catogory" name="catogory"  value="<%=product.catogory%>">  
+            </div><br> -->
+            <div class="form-group">
+            <select name="catogory" id="">
+                <%cat.forEach((element) => {%>
+                <option value="<%=element._id%>"><%=element.catogory%></option>
+                <%})%>
+            </select>
+        </div>
+            <br>
+            <img src="/images/<%=product._id%>.jpg" alt="<%=product.name%>" style="width: 100px;height:auto;" >
+
+            <div class="form-group">
+                <input type="file" class="form-control" placeholder="Upload Image" name="image">
+            </div>
+            <button type="submit" class="btn btn-success rounded-pill">Edit Product</button>
+
+        </form>
+<%-include('footer')-%>

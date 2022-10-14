@@ -1,0 +1,28 @@
+<%-include('header')-%>
+<%-include('adminNav')-%>
+
+  
+    <div class="text-center center-div mt-5 " id="login">
+        <div class="container w-25 border py-5  ">
+            <div class="title pb-5">
+                <h2 class="font-weight-bold">Admin Login page</h2>
+                <!-- <span>Login for the existing user</span> -->
+            </div>
+            <form action="/admin/login/" method="POST" class="pt-3">
+                <% if(loginErr) { %>
+                    <p class="fs6" style="color:red"><%=loginErr%></p>
+                <% } %>
+                <div class="form-group">
+                    <input type="username" class="form-control" placeholder="Username" name="username">  
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="password" name="password">
+                </div>
+                <button type="submit" class="btn btn-success rounded-pill" value="login">Login</button>
+                <br>
+            </form>
+        </div>
+    
+    </div>
+    
+<%- include('footer') -%>

@@ -1,0 +1,99 @@
+<%-include('header')-%>
+<link rel="stylesheet" href="stylesheets/frontend.css">
+<%-include('userNAVBar')-%>
+<!-- <div class="container">
+  <div class="navbar">
+      <div class="logo">
+          <img src="frontend-images/logo.png" alt="" width="125px">
+      </div>
+      <nav>
+          <ul>
+              <li><a href="">Home</a></li>
+              <li><a href="">Products</a></li>
+              <li><a href="/orders">orders</a></li>
+              <li><a href="/logout">Account</a></li>
+              <!-- <li><a href="/user-profile"><img src="frontend-images/user.png" class="account-image"></a></li> -->
+          </ul>
+      </nav>
+      <a href="/cart">
+          <img src="frontend-images/shopping-cart.png"  alt="" width="30px" height="30px">
+          
+      </a> 
+  </div>
+</div> -->
+
+<h2><P>Your addressess</P></h2>
+
+<div class="container d-flex" >
+  <% address.forEach((element) => { %>
+    <div class="cards">
+      <div class="container container-details">
+        <h3><P><%=element.full_name%></P></h3><br>
+        <p><%=element.house%> </p><br>
+        <p><%=element.phone%> </p><br>
+        <p><%=element.country%> </p><br>
+        <p><%=element.state%> </p><br>
+        <p><%=element.district%> </p><br>
+        <p><%=element.pincode%></p>
+        <a href="/edit-address/<%=element._id%>">Edit </a>
+        <!-- <a href="/delete-address/<%=element._id%>"><i class="material-icons" style="color: red;" onclick="return alert('are you sure')">delete</i></a> -->
+        <button><i class="material-icons" style="color: red;" onclick="return alert('Do you want to delete'),deleteAddress(`<%=element._id%>`)">delete</i></button>
+      </div>
+    </div>
+  <% }) %>
+</div>
+<br><br><br><br>
+<!-- footer -->
+<div class="footer">
+  <div class="container">
+      <div class="row">
+          <div class="footer-col-1">
+              <h3>
+                  Download our app
+              </h3>
+              <p>Download our app for android and ios mobile phone </p>
+              <div class="app-logo">
+                  <img src="/frontend-images/play-store.png" >
+                  <img src="/frontend-images/app-store.png" >
+              </div>
+          </div>
+          <div class="footer-col-2">
+              <img src="/frontend-images/logo-white.png" alt="">
+              <p>Download our app for android and ios mobile phone </p>
+          </div>
+          <div class="footer-col-3">
+              <h3>Usefull Links</h3>
+              <ul>
+                  <li>Coupons</li>
+                  <li>Blog Post</li>
+                  <li>Return Policy</li>
+                  <li>Join Affiliate</li>
+              </ul>
+          </div>
+          <div class="footer-col-4">
+              <h3>Follow us</h3>
+              <ul>
+                  <li>Facebook</li>
+                  <li>Instagram</li>
+                  <li>Youtube</li>
+                  <li>Twitter</li>
+              </ul>
+          </div>
+      </div>
+  </div>
+</div>
+
+<script>
+    function deleteAddress(addressId) {
+        console.log(addressId)
+        $.ajax({
+            url:`/delete-address/${addressId}`,
+            method:'delete',
+            success : (response) => {
+                location.reload()
+            }
+        })
+    }
+</script>
+
+<%-include('footer')-%>

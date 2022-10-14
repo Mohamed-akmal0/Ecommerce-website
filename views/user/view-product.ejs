@@ -1,0 +1,36 @@
+<%-include('header')-%>
+<div class="container-fluid admin">
+  <div class="navbar">
+      <div class="logo">
+          <img src="/frontend-images/logo.png" alt="" width="125px">
+      </div>
+      <nav>
+          <ul>
+              <li><a href="">Dashboard</a></li>
+              <li><a href="/admin/admin_product">Products</a></li>
+              <li><a href="">Categories</a></li>
+              <li><a href="/admin/admin_page">Customers</a></li>
+              <li><a href="/admin/view-orders">Ordes</a></li>
+              <li><a href="/admin/logout">Logout</a></li>
+
+          </ul>
+      </nav>
+  </div>
+</div>
+<div class="small-container">
+  <div class="row row-2" >
+      <h2>All Products</h2>
+  </div>
+  <% products.forEach((element)=>{ %>
+  <div class="row">
+      <div class="col-4">
+          <img src="/images/<%=element.product._id%>.jpg">
+          <h2><%=element.product.name%></h2>
+          <p><%=element.product.description%></p>
+          <p>Rs<%=element.product.price%></p>
+          <p>Quantity <%=element.quantity%></p>
+      </div>
+    </div>
+    <% }) %>
+</div>
+<%-include('footer')-%>

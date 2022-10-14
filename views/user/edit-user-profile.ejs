@@ -1,0 +1,55 @@
+<%-include('header')-%>
+<%-include('userNAVBar')-%>
+ <!-- <div class="container">
+  <div class="navbar">
+      <div class="logo">
+          <img src="frontend-images/logo.png" alt="" width="125px">
+      </div>
+      <nav>
+          <ul>
+              <li><a href="">Home</a></li>
+              <li><a href="">Products</a></li>
+              <li><a href="/orders">orders</a></li>
+              <li><a href="/logout">Account</a></li>
+              <li><a href="/user-profile"><img src="frontend-images/user.png" class="account-image"></a></li> 
+          </ul>
+      </nav>
+      <a href="/cart">
+          <img src="frontend-images/shopping-cart.png"  alt="" width="30px" height="30px">
+          
+      </a> 
+  </div>
+</div>  -->
+
+<div class="container">
+  <div class="small-container">
+    <form action="" method="" id="editUserProfile">
+      <input type="text" name="user" placeholder="Username"  value="<%=data.user%>" required>
+      <input type="email"" name="email" placeholder="Email" value="<%=data.email%>" required>
+      <input type="text" name="userid" value="<%=userid._id%>" hidden id="userid">
+      <button type="submit" class="btn">Save</button>
+    </form>
+  </div>
+</div>
+<script>
+  $("#editUserProfile").submit((e) => {
+    e.preventDefault();
+    let id = document.getElementById("userid").value
+    console.log(id)
+    $.ajax({
+      url: `/edit-user-profile/${id}`,
+      method: "put",
+      data: $("#editUserProfile").serialize(),
+      success: (response) => {
+        console.log(response);
+        alert("Press OK to confirm");
+        if (response == response) {
+          location.href = "/user-profile";
+        } else {
+          alert('There is an error occured in your editting for your profile')
+        }
+      },
+    });
+  });
+</script>
+<%-include('footer')-%>

@@ -1,0 +1,35 @@
+<%-include('header')-%>
+<%-include('adminNav')-%>
+
+<div class="container admin ">
+  <table id="example" class="display" style="width:100%">
+    <thead>
+      <tr>
+        <th>NO</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Block</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% user.forEach((element,i)=>{ %>
+        <tr>
+          <th scope="row"><%=i+1%></th>
+          <td><%=element.user%></td>
+          <td><%=element.email%></td>
+          <td><%=element.blocked%></td>
+          <td><a href="/admin/edit-user/<%=element._id%>" class="btn ">Block</a></td> 
+          <td></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<script>
+  $(document).ready(function () {
+    $('#example').DataTable();
+  });
+</script>
+<%- include('footer') -%>

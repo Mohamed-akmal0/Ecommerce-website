@@ -1,0 +1,88 @@
+<%-include('header')-%>
+<div class="text-center center-div id="login">
+        <div class="container w-25 border py-5">
+            <div class="title pb-5">
+                <h2 class="font-weight-bold"> User</h2>
+                <span>Add new user</span>
+            </div>
+            <form action="/admin/admin_adduser" id="add-user" method="POST" class="pt-3">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Username" name="user" required>
+                </div><br>
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="email" name="email" required>  
+                </div>
+                <p class="fs-4" style="color: red;"><%=message%></p>
+                <br>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="password" name="password" required>
+                </div><br>
+                <button type="submit" class="btn btn-success rounded-pill">Add</button>
+                <!-- <a href="/route/admin_adduser" class="btn btn-success">Add </a> -->
+            </form>
+        </div>
+    
+    </div>
+    <script>
+        $(document).ready(function () {
+    console.log("started");
+    jQuery.validator.addMethod(
+      "testUsername",
+      function (value, element) {
+        return this.optional(element) || /^[a-zA-Z0-9_]+$/.test(value);
+      },
+      "Use only alphabets and undersore"
+    );
+    jQuery.validator.addMethod(
+      "testName",
+      function (value, element) {
+        return this.optional(element) || /^[a-zA-Z ]+$/.test(value);
+      },
+      "Use only alphabets"
+    );
+    
+    jQuery.validator.addMethod(
+      "minlength",
+      function (value, element, params) {
+        return this.optional(element) || value.trim().length >= params;
+      },
+      jQuery.validator.format("Please enter at least {0} characters.")
+    );
+    $("#add-user").validate({
+      rules: {
+        user: {
+          required: true,
+          minlength: 4,
+          maxlength: 50,
+          testName : true,
+        },
+        email: {
+          required: true,
+          email: true,
+        },
+        password: {
+          required: true,
+          minlength: 8,
+        },
+      },
+      submitHandler: function (form) {
+        // form.preventDefault();
+        console.log("recieved");
+        $.ajax({
+          url: "/route/admin_adduser",
+          data: $("#add-user").serialize(),
+          method: "POST",
+          success: function (response) {  
+            window.location.reload();
+          },
+          error: function (err) {
+            err = jQuery.parseJSON(err.responseText);
+            console.log(err.message);
+            $("#error").text(err.message);
+          },
+        });
+      },
+    });
+  });
+    </script>
+<%- include('footer') -%>

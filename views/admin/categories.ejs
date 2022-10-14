@@ -1,0 +1,54 @@
+<%-include('header')-%>
+<%-include('adminNav')-%>
+
+
+  <div class="container-fluid admin">
+    <!-- <div class="small-container"> -->
+      <table  class="display" id="Category" style="width: 100%;">
+        <thead>
+          <th >No</th>
+          <th >Category</th>
+          <th >Offers</th>
+          <th >edit</th>
+          
+          <th >delete</th>
+        </thead>
+        <tbody>
+          <%getcategory.forEach((element,i) => {%>
+          <tr>
+            <td ><%=i+1%></td>
+            <td ><%=element.catogory%></td>
+            <td ><%=element.Offer%></td>
+            <td ><a href="/admin/edit-category/<%=element._id%>" class="btn" >Edit </a></td>
+            <td><button class="btn" onclick="return alert('are you sure' , deleteCategory(`<%=element._id%>`))">Delete</button></td>
+          </tr>
+          <%})%>
+        </tbody>
+      </table>
+    <!-- </div> -->
+  </div>
+  <script>
+    $(document).ready(function () {
+      $('#Category').DataTable({
+        dom:'Bfrtip',
+        "paging" : false,
+        "ordering" : false,
+        "info" : false
+      });
+    });
+  </script>
+ <script>
+  function deleteCategory(id) {
+    $.ajax({
+      url:`/admin/delete-category/${id}`,
+      method:'delete',
+      success : (response) => {
+        console.log(response)
+        location.reload()
+      }
+    })
+  }
+ </script>
+
+
+<%-include('footer')-%>

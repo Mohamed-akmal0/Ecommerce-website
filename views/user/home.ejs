@@ -1,0 +1,127 @@
+<%-include('header')-%>
+    <div class="header">
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <img src="frontend-images/logo.png" alt="" width="125px">
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="">Home</a></li>
+                    <li><a href="">Products</a></li>
+                    <li><a href="">About</a></li>
+                    <li><a href="">Contact</a></li>
+                    <li><a href="/signup">Account</a></li>
+                </ul>
+            </nav>
+            <img src="frontend-images/shopping-cart.png" alt="" width="30px" height="30px">
+            <img src="frontend-images/menu.png" class="menu-icon" onclick="menutoggle()">
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <h1>Give your day <br> a New Style!</h1>
+                <p>Wearing a clean outfit give's you a lot of confidence. <br> Perception Equals Reality</p>
+                <a href="/login" class="btn">Explore Now &#8594;</a>
+            </div>
+            <div class="col-2">
+                <img src="frontend-images/banner-02.jpg" alt="">
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="catrgories">
+        <div class="small-container">
+            <div class="row">
+                <div class="col-3">
+                    <img src="frontend-images/category-1.jpg" alt="" srcset="">
+                </div>
+                <div class="col-3">
+                    <img src="frontend-images/category-1.jpg" alt="" srcset="">
+                </div>
+                <div class="col-3">
+                    <img src="frontend-images/category-1.jpg" alt="" srcset="">
+                </div>
+            </div>
+        </div> 
+    </div>
+    <div class="small-container">
+        <h2 class="title" >Featured Products</h2>
+        <div class="row">
+            <div class="col-4">
+                <img src="frontend-images/gallery-1.jpg" alt="" srcset="">
+                <h4>Red Printed T-shirt</h4>
+            </div>
+            <div class="col-4">
+                <img src="frontend-images/gallery-1.jpg" alt="" srcset="">
+                <h4>Red Printed T-shirt</h4>
+            </div>
+            <div class="col-4">
+                <img src="frontend-images/gallery-1.jpg" alt="" srcset="">
+                <h4>Red Printed T-shirt</h4>
+            </div>
+            <div class="col-4">
+                <img src="frontend-images/gallery-1.jpg" alt="" srcset="">
+                <h4>Red Printed T-shirt</h4>
+            </div>
+            <div class="col-4">
+                <img src="frontend-images/gallery-1.jpg" alt="" srcset="">
+                <h4>Red Printed T-shirt</h4>
+            </div>
+            <div class="col-4">
+                <img src="frontend-images/gallery-1.jpg" alt="" srcset="">
+                <h4>Red Printed T-shirt</h4>
+            </div>
+        </div>
+    </div>
+    <!-- footer -->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col-1">
+                    <h3>
+                        Download our app
+                    </h3>
+                    <p>Download our app for android and ios mobile phone </p>
+                    <div class="app-logo">
+                        <img src="frontend-images/play-store.png" >
+                        <img src="frontend-images/app-store.png" >
+                    </div>
+                </div>
+                <div class="footer-col-2">
+                    <img src="frontend-images/logo-white.png" alt="">
+                    <p>Download our app for android and ios mobile phone </p>
+                </div>
+                <div class="footer-col-3">
+                    <h3>Usefull Links</h3>
+                    <ul>
+                        <li>Coupons</li>
+                        <li>Blog Post</li>
+                        <li>Return Policy</li>
+                        <li>Join Affiliate</li>
+                    </ul>
+                </div>
+                <div class="footer-col-4">
+                    <h3>Follow us</h3>
+                    <ul>
+                        <li>Facebook</li>
+                        <li>Instagram</li>
+                        <li>Youtube</li>
+                        <li>Twitter</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var icon = document.getElementById("icon")
+        icon.onclick = function () {
+            document.body.classList.toggle("dark-theme")
+            if(document.body.classList.contains("dark-theme")){
+                icon.src="frontend-images/sun.png";
+            }else{
+                icon.src="frontend-images/moon.png";
+            }
+        }
+    </script>
+    <%- include('footer') -%>
