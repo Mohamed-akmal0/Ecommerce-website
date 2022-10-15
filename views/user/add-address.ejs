@@ -1,25 +1,6 @@
 <%-include('header')-%>
-<%-include('userNAVBar)-%>
-<!-- <div class="container">
-  <div class="navbar">
-      <div class="logo">
-          <img src="frontend-images/logo.png" alt="" width="125px">
-      </div>
-      <nav>
-          <ul>
-              <li><a href="">Home</a></li>
-              <li><a href="">Products</a></li>
-              <li><a href="/orders">orders</a></li>
-              <li><a href="/logout">Account</a></li>
-              <!-- <li><a href="/user-profile"><img src="frontend-images/user.png" class="account-image"></a></li> -->
-          </ul>
-      </nav>
-      <a href="/cart">
-          <img src="frontend-images/shopping-cart.png"  alt="" width="30px" height="30px">
-          
-      </a> 
-  </div>
-</div> -->
+<%-include('userNAVBar')-%>
+
 <div class="container">
     <p class="your-address">ADD ADDRESS</p>
     <div class="Right-div">
@@ -27,13 +8,13 @@
         <br>
         <div class="form-div">
             <form action="/add-address" method="post">
-                <input type="text" name="full_name"   placeholder="Full name">
-                <input type="text" name="house"   placeholder="House">
-                <input type="number" name="phone"    placeholder="Phone Number">
-                <input type="text" name="country"    placeholder="Country">
-                <input type="text" name="state"    placeholder="State">
-                <input type="text" name="district"   placeholder="District">
-                <input type="number" name="pincode"   placeholder="Pincode">
+                <input type="text" name="full_name"   placeholder="Full name" required>
+                <input type="text" name="house"   placeholder="House" required>
+                <input type="number" name="phone"    placeholder="Phone Number" required>
+                <input type="text" name="country"    placeholder="Country" required>
+                <input type="text" name="state"    placeholder="State" required>
+                <input type="text" name="district"   placeholder="District" required>
+                <input type="number" name="pincode"   placeholder="Pincode" required>
                 <input type="text" name="userid" value="<%=user._id%>" hidden>
                 <br>
                 <input type="submit" value="submit" class="btn">

@@ -6,6 +6,9 @@
         </div>  -->
   
 <%-include('proHeader')-%>
+<link rel="stylesheet" href="../../stylesheets/navbar.css">
+<link rel="stylesheet" href="../../stylesheets/query.css">
+<%-include('userNAVBar')%>
 <section class="container mt-50 mb-100" style="padding-top: 150px;">
   <div class="row">
     <div class="col-md-4 ">
@@ -20,7 +23,6 @@
         <h6 class="fw-normal"><a href="/user-address" class="text-secondary btn">Address</a></h6>
         <h6 class="fw-normal"><a href="/orders" class="text-secondary btn">My Orders </a></h6>
         <h6 class="fw-normal"><a href="/whishlist" class="text-secondary btn">My wishlist </a></h6>
-        <h6 class="fw-normal"><a href="/coupon" class="text-secondary btn">Coupon </a></h6>
         <h6 class="fw-normal"><a href="/change-password" class="text-secondary btn">Change Password</a></h6>
       </div>
     </div>
@@ -47,10 +49,10 @@
                 <%=user.email%>
                 </span> </td>
             </tr>
-            <tr>
+            <!-- <tr>
               <td class="text-secondary">Mobile Number</td>
               <td class="text-secondary">: <span class="ms-2"></span> </td>
-            </tr>
+            </tr> -->
             <tr>
               <td class=" text-center pt-5" colspan="2">
                 <a href="/edit-user-profile/<%=USER._id%>" type="submit" class="s-btn s-btn-2">Edit Profile</a>

@@ -295,7 +295,8 @@ module.exports={
             console.log(oldPassword)
             if(oldPassword == true){
                 if(new_password == confirm_password){
-                    var newP = bcrypt.hash(new_password,10)
+                    var newP = await bcrypt.hash(new_password,10)
+                    console.log(newP)
                     db.get().collection(collection.user_collection).updateOne({_id:objectID(userid)},
                     
                     {
@@ -306,11 +307,13 @@ module.exports={
                         resolve(data)
                     })
                 }else{
+                    resolve()
                     reject('miss match of old and confirm password')
                 }
                 // console.log('work aaayui')
             }else{
                 console.log('adiuch pooyi')
+                resolve()
             }
         })
     },

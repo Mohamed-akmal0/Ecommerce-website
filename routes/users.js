@@ -350,6 +350,8 @@ router.patch('/delete-whishlist' , userVerify , (req,res) => {
         })
 })
 
+
+
 //route for rendering change password route for user
 router.get('/change-password' , userVerify,(req,res) => {
         res.render('user/change-password' , {user : req.session.user})
@@ -359,8 +361,15 @@ router.get('/change-password' , userVerify,(req,res) => {
 router.post('/change-password/:id' , (req,res) => {
     let uid = req.session.user._id
     let passbody = req.body
-    getUser.changePassword(uid,passbody).then((data) => {
-        res.redirect('/user-profile')
+    console.log(passbody)
+    getUser.changePassword(uid,passbody).then((response) => {
+        console.log(response)
+        if(response){
+            res.json(response)
+        }else{
+            res.json({status:false})
+        }
+        // res.redirect('/user-profile')
     })  
 })
 
