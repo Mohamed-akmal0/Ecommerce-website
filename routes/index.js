@@ -10,6 +10,7 @@ const { Db } = require('mongodb');
 const { off } = require('../app');
 const { createPrivateKey } = require('crypto');
 const getCoupon = require('../queries/coupon')
+require('dotenv').config()
 var router = express.Router();
 
 //file upload
@@ -17,8 +18,8 @@ router.use(fileUpload())
 
 //creating database value
 const details = {
-  username: "admin@123",
-  password:"admin"
+  username: process.env.ADMIN_NAME,
+  password:process.env.ADMIN_PASSWORD
 }
 
 //login verifying middleware

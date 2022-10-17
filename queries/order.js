@@ -4,10 +4,11 @@ const objectID = require('mongodb').ObjectId
 const Razorpay = require('razorpay')
 const crypto = require ('crypto')
 const { resolve } = require('path')
+require('dotenv').config()
 
 var instance = new Razorpay({
-  key_id : 'rzp_test_U40uDVlng8u6Cw',
-  key_secret : 'FczuHHJBjBKkC7WQamtQrPFm'
+  key_id : process.env.RAZORPAY_ID,
+  key_secret : process.env.RAZORPAY_SECRET
 })
 module.exports = {
   getOrders : (userid) => {

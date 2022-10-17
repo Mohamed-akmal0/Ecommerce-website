@@ -45,7 +45,6 @@
             <input class="from-check-input" type="radio" name="savedAddress" value="<%=element.full_name%> <%=element.house%> <%=element.phone%> <%=element.country%> <%=element.state%> <%=element.district%> <%=element.pincode%>" id="address.container"  onclick="addFields(`<%=element.full_name%>`,`<%=element.house%>`,`<%=element.phone%>`,`<%=element.country%>`,`<%=element.state%>`,`<%=element.district%>`,`<%=element.pincode%>`)">
             <label class="form-check-label">
               <%=element.full_name%>
-              <%=element.full_name%>
               <%=element.house%>
               <%=element.phone%>
               <%=element.country%>
@@ -56,9 +55,7 @@
           </div>
         <% })%>
       <% } else { %>
-        <!-- <p class="d-flex total-price"> -->
           <span class="col-12">Saved Address is Empty</span>
-        <!-- </p> -->
       <% } %>
     </div>
     <div class="col-md-8 order-md-1">
@@ -147,7 +144,7 @@
         <!-- Set up a container element for the button -->
         <div id="paypal-button-container" class="clr"></div>
         <div id="checkout-button" class="clr">
-          <button class="btn btn-primary btn-lg btn-block" type="submit" id="btn-place-order">Continue to checkout</button>
+          <button class="btn-lg btn-block" type="submit" id="btn-place-order" style="background-color:#ff523b; border:none;color:#fff">Continue to checkout</button>
           <input type="text" name="userid" value="<%=user._id%>" hidden>
         </div>
       </form>

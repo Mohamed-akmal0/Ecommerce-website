@@ -8,10 +8,8 @@
             <th>NO</th>
             <th>Date</th>
             <th>Name</th>
-            <th>Email</th>
             <th>Address</th>
             <th>Phone</th>
-            <th>Pincode</th>
             <th>Amount</th>
             <th>payment</th>
             <th>Status</th>
@@ -26,10 +24,8 @@
           <th scope="row"><%=i+1%></th>
           <td><%=element.date%></td>
           <td><%=element.deliveryDetails.firstname%></td>
-          <td><%=element.deliveryDetails.emailaddress%></td>
-          <td><%=element.deliveryDetails.address%></td>
+          <td><%=element.deliveryDetails.lastname%> <%=element.deliveryDetails.district%> <%=element.deliveryDetails.state%> <%=element.deliveryDetails.pincode%></td>
           <td><%=element.deliveryDetails.phone%></td>
-          <td><%=element.deliveryDetails.pincode%></td>
           <td><%=element.totalAmount%></td>
           <td><%=element.payment%></td>
           <td><%=element.status%></td>
