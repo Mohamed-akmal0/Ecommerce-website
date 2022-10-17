@@ -35,14 +35,14 @@
                     </td>
                 </tr>
                 <%})%>
+                <% } else {%>      
+                    <div class="cartIsEmpty">
+                        <h4>Your cart is empty</h4>
+                        <img src="/frontend-images/3298067.jpg" width="460px" height="460px">
+                    </div>
+                <% } %>
             </table>
         </div>
-<% } else {%>
-    <div class="cartIsempty">
-        <h4>Your cart is empty</h4>
-        <img src="/frontend-images/3298067.jpg" width="460px" height="460px" >
-    </div>
-<% } %>
  <!-- <% if(totalAmount == null) {%> -->
     <!-- <p>There is no product</p> -->
 <!-- <% } else { %> -->

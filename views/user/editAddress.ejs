@@ -1,59 +1,59 @@
-<%-include('header')-%>
+<%-include('proheader')-%>
+<link rel="stylesheet" href="../../stylesheets/navbar.css">
+<link rel="stylesheet" href="../../stylesheets/query.css">
 <%-include('userNAVBar')-%>
-<!-- <div class="header">
-  <div class="container">
-      <div class="navbar">
-          <div class="logo">
-              <img src="frontend-images/logo.png" alt="" width="125px">
-          </div>
-          <nav>
-              <ul>
-                  <li><a href="">Home</a></li>
-                  <li><a href="">Products</a></li>
-                  <li><a href="/signup"><img src="frontend-images/user.png" class="account-image"></a></li>
-
-  
-              </ul>
-          </nav>
-          <img src="frontend-images/shopping-cart.png" alt="" width="30px" height="30px">
-      </div> -->
       <div class="container">
-        <p class="your-address">EDIT ADDRESS</p>
-        <div class="Right-div">
-           
-            <br>
-            <div class="form-div">
-                <form action="" method="" id="editAddress">
-                    
-                    <input type="text" name="full_name"   placeholder="Full name" value="<%=edit.full_name%>">
-                    <input type="text" name="house"   placeholder="House" value="<%=edit.house%>">
-                    <input type="number" name="phone"    placeholder="Phone Number" value="<%=edit.phone%>">
-                    <input type="text" name="country"    placeholder="Country" value="<%=edit.country%>">
-                    <input type="text" name="state"    placeholder="State" value="<%=edit.state%>">
-                    <input type="text" name="district"   placeholder="District" value="<%=edit.district%>">
-                    <input type="number" name="pincode"   placeholder="Pincode" value="<%=edit.pincode%>">
-                    <input type="text" name="addressId" value="<%=edit._id%>"  id="addressId">
-                    <!-- <input type="text" name="userid" value="<%=user._id%>" hidden> -->
-                    <br>
-                    <input type="submit" value="submit" class="btn">
-                </form>
+        <div class="col-md-8 order-md-1">
+            <h4 class="mb-3">Edit Address</h4>
+            <form class="needs-validation" action="/add-address" method="" id="editAddress">
+                <span id="formErr" class="text-danger"></span>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="">Full name</label>
+                  <input type="text" class="form-control" name="full_name" id="fullname" placeholder="" value="<%=edit.full_name%>" required onkeyup="validateName()">
+                  <span id="fullname-error" class="text-danger"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="">House</label>
+                  <input type="text" class="form-control" name="house" id="house" placeholder="" value="<%=edit.house%>" required onkeyup="validateHouse()">
+                  <span id="house-error" class="text-danger"></span> 
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="">Phone</label>
+                  <input type="number" class="form-control" name="phone" id="phone" placeholder="" value="<%=edit.phone%>" required onkeyup="validatePhone()">
+                  <span id="phone-error" class="text-danger"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="">Land Mark</label>
+                  <input type="text" class="form-control" name="country" id="country" placeholder="" value="<%=edit.country%>" required onkeyup="validateLand()">
+                  <span id="landMark-error" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="">State</label>
+                  <input type="text" class="form-control" name="state" id="state" placeholder="" value="<%=edit.state%>" required onkeyup="validateState()">
+                  
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="">District</label>
+                  <input type="text" class="form-control" name="district" id="district" placeholder="" value="<%=edit.district%>" required onkeyup="validateDistrict()">
+                  <span id="district-error" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="">Pincode</label>
+                  <input type="number" class="form-control" name="pincode" id="pincode" placeholder="" value="<%=edit.pincode%>" required onkeyup="validatePincode()">
+                  <span id="pincode-error" class="text-danger"></span>
+                </div>
+                <input type="text" name="addressId" value="<%=edit._id%>" id="addressId" hidden>
+                <button class="btn btn-primary btn-lg btn-block" type="submit" id="" onclick="saveAdd()">Save</button>
             </div>
-        </div>
+        </form>    
     </div>
-    <script>
-        $("#editAddress").submit((e) => {
-            e.preventDefault();
-            let editId = document.getElementById("addressId").value
-            console.log(editId)
-            $.ajax({
-                url:`/edit-address/${editId}`,
-                method:"put",
-                data:$("#editAddress").serialize(),
-                success:(response) => {
-                    alert("Press ok to confirm")
-                    location.href=('/user-address')
-                }
-            })
-        })
-    </script>
+    </div>
+    <script src="../../javascripts/validate.js"></script>
 <%-include('footer')-%>

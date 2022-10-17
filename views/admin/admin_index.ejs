@@ -1,12 +1,8 @@
-<%-include('header')-%>
-<%-include('adminNav')-%>
-
-  
+<%-include('header')-%>  
     <div class="text-center center-div mt-5 " id="login">
         <div class="container w-25 border py-5  ">
             <div class="title pb-5">
                 <h2 class="font-weight-bold">Admin Login page</h2>
-                <!-- <span>Login for the existing user</span> -->
             </div>
             <form action="/admin/login/" method="POST" class="pt-3">
                 <% if(loginErr) { %>

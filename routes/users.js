@@ -135,7 +135,6 @@ router.get('/addto-cart/:id' ,userVerify, (req,res) => {
 
 //routing for changing product quantity
 router.post('/change-product-quantity' ,(req,res,next) => {
-    console.log(req.body)
     getCart.changeQuantity(req.body).then( async (response) => {
         response.total = await getCart.getTotal(req.body.user)
         res.json(response)
@@ -149,7 +148,6 @@ router.delete('/delete-cart/:id' ,userVerify, (req,res) => {
     console.log(pid,uid);
         getCart.deleteCart(pid,uid).then( (response) => {
             res.json(response)
-            // res.redirect('/cart')
         })
 })
 
@@ -163,10 +161,8 @@ router.get('/proceed-to-checkout',userVerify, async (req,res) => {
 
 router.post('/proceed-to-checkout' , userVerify, async  (req,res) => {
         let uid = req.body.userid
-        console.log(uid)
         let products = await getCart.getCartProductList(uid)
         let totalAmount = await getCart.getTotal(uid)
-        // console.log(req.body);
         let {couponPrice} = req.body
         let {couponid} = req.body
         let CouponName = ''
@@ -191,12 +187,11 @@ router.post('/proceed-to-checkout' , userVerify, async  (req,res) => {
                 console.log("orderid" + id)
                 console.log(req.body)
                     await getOrders.ChangingPaymentStatus(id)
-                    res.json({paypal:true})
-                
+                    res.json({paypal:true})   
             }
-            // res.json({status:true})
         })
 })
+
 //route for checking coupon 
 router.post('/check_coupon' ,userVerify, async (req,res) => { 
     const {Coupon} = req.body
@@ -207,8 +202,7 @@ router.post('/check_coupon' ,userVerify, async (req,res) => {
         }else{
             res.json({status:false})
         }
-    })
-    
+    })   
 })
 
 //route for rendering order placed page
@@ -314,7 +308,6 @@ router.post('/add-address' ,(req,res) => {
 //route for rendering edit adddress for user
 router.get('/edit-address/:id' , userVerify,async  (req,res) => {
         let aid = req.params.id
-        console.log("getil id"+aid)
         let edit = await getUser.getEditAddress(aid)
         res.render('user/editAddress' , { edit,  user:req.session.user})
 })
@@ -329,7 +322,6 @@ router.put('/edit-address/:id' , userVerify,(req,res) => {
 
 //route for rendering delete address page for user
 router.delete('/delete-address/:id' , userVerify, async  (req,res) => {
-        console.log('delete address routeil ethi')
         let deleteId = req.params.id
         getUser.deleteAddress(deleteId).then((response) => {
             res.json(response)
@@ -350,8 +342,6 @@ router.patch('/delete-whishlist' , userVerify , (req,res) => {
         })
 })
 
-
-
 //route for rendering change password route for user
 router.get('/change-password' , userVerify,(req,res) => {
         res.render('user/change-password' , {user : req.session.user})
@@ -369,7 +359,6 @@ router.post('/change-password/:id' , (req,res) => {
         }else{
             res.json({status:false})
         }
-        // res.redirect('/user-profile')
     })  
 })
 

@@ -14,16 +14,6 @@ module.exports={
             resolve(user)
         })
     },
-
-    deleteUser:(uid)=>{
-        return new Promise((resolve,reject)=>{
-            db.get().collection(collection.user_collection).deleteOne({_id:objectID(uid)}).then((response)=>{
-                resolve(response)
-            })
-        })
-
-        
-    },
     userDetails:(udetails)=>{
         return new Promise((resolve,reject)=>{
             db.get().collection(collection.user_collection).findOne({_id:objectID(udetails)}).then((user)=>{
@@ -54,27 +44,6 @@ module.exports={
                     resolve(true)
                 })
             })
-        })
-    },
-
-    adduser:(user)=>{
-        return new Promise(async(resolve,reject)=>{
-            var success = null
-            var isthere = await db.get().collection(collection.user_collection).findOne({$or:[{user:user.user},{email:user.email}]})
-            if(user.user == collection.user|| user.email == collection.email){
-                success = false
-                resolve(success)
-            }
-            else if(!isthere){
-                success  = true
-                user.password = await bcrypt.hash(user.password,10)
-                db.get().collection(collection.user_collection).insertOne(user)
-                resolve(success)
-            }
-            else{
-                success = false
-                resolve(success)
-            }
         })
     },
     addtocart: (pid,uid) => {
@@ -123,7 +92,6 @@ module.exports={
         let proObj={
             item:objectID(pid),
         }
-  
         return new Promise(async(resolve,reject)=>{
             let wishCart = await db.get().collection(collection.whishlist_collection).findOne({user:objectID(uid)})
             if(wishCart){
@@ -188,11 +156,15 @@ module.exports={
         })
     },
     getEditAddress : (Aid) => {
+        try{
         return new Promise ( async (resolve,reject) => {
             let getEdit = await db.get().collection(collection.address_collection).findOne({_id:objectID(Aid)})
-                resolve(getEdit)
-           
+                resolve(getEdit)  
         })
+    }catch(err){
+        console.log('Error that occured in the getEditAddress' +err)
+        res.redirect('/serverError')
+    }
     },
 
     editAddress : (addressId , addressDetails) => {
@@ -216,7 +188,7 @@ module.exports={
             })
             }catch(err){
                console.log("Error that occurred in editAddress function"+err) 
-               reject()
+               res.redirect('/serverError')
             }
             
         })
@@ -260,18 +232,17 @@ module.exports={
                 //     }
                 // }
             ]).toArray()
-            // console.log(list)
             resolve(list)
         }catch(err){
             console.log("Error that occurred in get whishlist function"+err)
+            res.redirect('/serverError')
         }
                      
       })  
     },
     deleteWhishlist : (whishlist) => {
+        try{
         const {wishid,productid} = whishlist
-        // console.log("whish id in delete function"+whishid)
-        // console.log("product id in delete function"+productid)
         console.log(typeof(productid))
         console.log(wishid)
         return new Promise ((resolve,reject) => {
@@ -280,16 +251,20 @@ module.exports={
                 $pull : {products:{item:ObjectID(productid)}}
             }
             ).then((response) => {
-                console.log(response)
                 resolve(response)
             })
         })
+    }catch(err){
+        console.log('Error that occurred in the deleteWhishlist' + err)
+        res.redirect('/serverError')
+    }
     },
     changePassword : (userid , passbody) => {
+        try{
+
+        
         const {old_password , new_password , confirm_password} = passbody
         return new Promise( async (resolve,reject) => {
-           console.log(old_password)
-            
             let user = await db.get().collection(collection.user_collection).findOne({_id:objectID(userid)})
             var oldPassword = await bcrypt.compare(old_password,user.password)
             console.log(oldPassword)
@@ -298,7 +273,6 @@ module.exports={
                     var newP = await bcrypt.hash(new_password,10)
                     console.log(newP)
                     db.get().collection(collection.user_collection).updateOne({_id:objectID(userid)},
-                    
                     {
                         $set: {
                             password:newP
@@ -308,14 +282,15 @@ module.exports={
                     })
                 }else{
                     resolve()
-                    reject('miss match of old and confirm password')
                 }
-                // console.log('work aaayui')
             }else{
-                console.log('adiuch pooyi')
                 resolve()
             }
         })
+    }catch(err){
+        console.log('Error that occured in the change password function' + err)
+        res.redirect('/serverError')
+    }
     },
     getProfile : (uid) => {
         return new Promise ((resolve,reject) => {
@@ -326,6 +301,7 @@ module.exports={
     },
 
     editProfile : (uid,editBody) => {
+        try{
         const {user , email} = editBody
         return new Promise((resolve,reject) => {
             db.get().collection(collection.user_collection).updateOne({_id:objectID(uid)},
@@ -339,5 +315,9 @@ module.exports={
                 resolve(response)
             })
         })
+    }catch(err){
+        console.log('Error that occured in the edit profile function' + err)
+        res.redirect('/serverError')
+    }
     }
 }

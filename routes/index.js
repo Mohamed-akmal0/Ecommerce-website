@@ -53,7 +53,7 @@ router.post('/login',(req,res)=>{
     req.session.admin = req.body
     res.redirect('/admin/admin_page')
   }else{
-    req.session.loginErr= 'Please check your password or username'
+    req.session.loginErr= 'please check your username and password'
     res.redirect('/admin/login')
   }
 })
@@ -281,6 +281,6 @@ router.delete('/delete_coupon/:id' ,adminVerify , (req,res) => {
 router.get('/logout',(req,res)=>{
 
   req.session.destroy()
-  res.render('admin/admin_index')
+  res.redirect('admin/admin_index')
 })
 module.exports = router;

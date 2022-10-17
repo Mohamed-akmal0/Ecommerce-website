@@ -16,9 +16,9 @@
         <p><%=element.state%> </p><br>
         <p><%=element.district%> </p><br>
         <p><%=element.pincode%></p>
+        <br>
         <a href="/edit-address/<%=element._id%>">Edit </a>
-        <!-- <a href="/delete-address/<%=element._id%>"><i class="material-icons" style="color: red;" onclick="return alert('are you sure')">delete</i></a> -->
-        <button><i class="material-icons" style="color: red;" onclick="return alert('Do you want to delete'),deleteAddress(`<%=element._id%>`)">delete</i></button>
+        <button onclick="return alert('Do you want to delete'),deleteAddress(`<%=element._id%>`)"><i class="material-icons" style="color: red;" >delete</i></button>
       </div>
     </div>
   <% }) %>

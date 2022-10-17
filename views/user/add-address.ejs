@@ -1,10 +1,11 @@
-<%-include('header')-%>
+<%-include('proheader')-%>
+<link rel="stylesheet" href="../../stylesheets/navbar.css">
+<link rel="stylesheet" href="../../stylesheets/query.css">
 <%-include('userNAVBar')-%>
 
 <div class="container">
-    <p class="your-address">ADD ADDRESS</p>
-    <div class="Right-div">
-       
+    <!-- <p class="your-address">ADD ADDRESS</p> -->
+    <!-- <div class="Right-div">
         <br>
         <div class="form-div">
             <form action="/add-address" method="post">
@@ -20,6 +21,58 @@
                 <input type="submit" value="submit" class="btn">
             </form>
         </div>
-    </div>
+    </div> -->
+    <div class="col-md-8 order-md-1">
+        <h4 class="mb-3">Add Address</h4>
+        <form class="needs-validation" action="/add-address" method="post">
+            <span id="formErr" class="text-danger"></span>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="">Full name</label>
+              <input type="text" class="form-control" name="full_name" id="fullname" placeholder="" value="" required onkeyup="validateName()">
+              <span id="fullname-error" class="text-danger"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="">House</label>
+              <input type="text" class="form-control" name="house" id="house" placeholder="" value="" required onkeyup="validateHouse()">
+              <span id="house-error" class="text-danger"></span> 
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="">Phone</label>
+              <input type="number" class="form-control" name="phone" id="phone" placeholder="" value="" required onkeyup="validatePhone()">
+              <span id="phone-error" class="text-danger"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="">Land Mark</label>
+              <input type="text" class="form-control" name="country" id="country" placeholder="" value="" required onkeyup="validateLand()">
+              <span id="landMark-error" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="">State</label>
+              <input type="text" class="form-control" name="state" id="state" placeholder="" value="" required onkeyup="validateState()">
+              
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="">District</label>
+              <input type="text" class="form-control" name="district" id="district" placeholder="" value="" required onkeyup="validateDistrict()">
+              <span id="district-error" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="">Pincode</label>
+              <input type="number" class="form-control" name="pincode" id="pincode" placeholder="" value="" required onkeyup="validatePincode()">
+              <span id="pincode-error" class="text-danger"></span>
+            </div>
+            <input type="text" name="userid" value="<%=user._id%>" hidden>
+            <button class="btn btn-primary btn-lg btn-block" type="submit" id="btn-place-order" onclick="saveAdd()">Save</button>
+        </div>
+    </form>    
 </div>
+
+<script src="../../javascripts/validate.js"></script>
 <%-include('footer')-%>
