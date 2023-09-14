@@ -3,8 +3,8 @@ const state = {
     db:null
 }
 module.exports.connect = function(done){
-    const url = 'mongodb://localhost:27017/'
-    const dbname = 'firstProject'
+    const url = process.env.DB_URI
+    const dbname =  process.env.DB_NAME
     mongoClient.connect(url,(err,data)=>{
         if(err){
             console.log('error...');
